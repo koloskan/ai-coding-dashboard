@@ -1,0 +1,251 @@
+keyword,category,traffic_2024,traffic_2025,traffic_change_pct,position_2024,position_2025,position_change,signups_2024,signups_2025,conversion_rate_2024,conversion_rate_2025,ai_overview_triggered,difficulty_score,cpc_usd
+ai coding assistant,High Intent Product,1660,2030,22.3,21,19,-2,42,76,3.14,3.64,No,48,12.59
+ai code completion,High Intent Product,1569,2005,27.8,23,15,-8,72,103,5.03,5.32,Yes,73,10.63
+ai pair programmer,High Intent Product,3358,3533,5.2,5,6,1,104,82,2.99,2.84,Yes,28,17.1
+code autocomplete ai,High Intent Product,2861,3022,5.7,22,22,0,148,150,5.33,4.99,Yes,71,5.19
+ai code generator,High Intent Product,3952,4670,18.2,8,10,2,137,180,3.41,3.25,Yes,50,9.47
+ai programming assistant,High Intent Product,5097,5908,15.9,10,12,2,252,282,5.63,5.15,No,40,14.08
+copilot alternative,High Intent Product,1678,2109,25.7,43,39,-4,101,125,5.4,4.98,Yes,48,8.62
+github copilot alternative,High Intent Product,3495,4874,39.5,37,31,-6,97,106,2.52,2.32,No,65,16.68
+ai code review tool,High Intent Product,1000,1065,6.6,25,27,2,43,58,4.68,5.24,Yes,51,11.2
+ai debugging tool,High Intent Product,7556,9423,24.7,16,14,-2,363,522,5.9,6.57,No,84,4.17
+ai refactoring tool,High Intent Product,1663,1762,6,32,33,1,70,93,4.73,4.84,No,60,17.11
+code ai assistant,High Intent Product,2522,3173,25.8,8,3,-5,139,173,4.93,4.71,No,35,7.53
+ai powered ide,High Intent Product,2838,3011,6.1,29,31,2,128,157,5.64,5.67,Yes,30,10.42
+ai coding tool,High Intent Product,5544,6610,19.2,26,29,3,201,274,4.2,4.05,Yes,76,8.14
+machine learning code assistant,High Intent Product,6416,6649,3.6,5,2,-3,186,245,3.39,4.06,No,26,10.29
+llm coding assistant,High Intent Product,6485,6943,7.1,4,5,1,168,194,2.62,3.13,No,28,3.75
+ai code writer,High Intent Product,4055,4885,20.5,36,33,-3,129,208,3.33,3.81,Yes,33,7.47
+automated code completion,High Intent Product,4197,5248,25,38,32,-6,224,278,4.94,5.64,Yes,31,5.2
+smart code completion,High Intent Product,3776,4271,13.1,13,13,0,160,162,3.89,3.75,No,66,6.5
+intelligent code assistant,High Intent Product,6683,8646,29.4,4,1,-3,174,365,3.11,3.64,No,83,5.42
+ai developer tools,High Intent Product,3970,4947,24.6,35,30,-5,163,269,4.95,4.7,No,44,11.5
+ai software development,High Intent Product,3983,4708,18.2,20,18,-2,122,131,2.86,3.13,Yes,57,2.78
+ai code suggestions,High Intent Product,5293,6411,21.1,9,3,-6,204,209,3.64,3.9,No,75,12.36
+ai programming tool,High Intent Product,1845,2381,29.1,10,4,-6,60,84,3.35,3.37,Yes,71,10.13
+code generation ai,High Intent Product,5348,6014,12.5,19,19,0,207,274,3.31,3.92,No,59,14.09
+ai coding agent,High Intent Product,1860,2045,10,37,37,0,122,110,5.75,5.68,No,47,6.66
+autonomous coding agent,High Intent Product,4194,4801,14.5,5,9,4,107,152,3.09,2.98,No,47,4.67
+agentic coding tool,High Intent Product,954,1013,6.3,11,10,-1,36,35,3.53,3.77,No,50,15.06
+cursor vs copilot,Competitor Comparison,10216,11764,15.2,22,19,-3,147,171,1.74,1.78,Yes,75,7.74
+tabnine vs copilot,Competitor Comparison,7419,8611,16.1,24,22,-2,274,221,3.23,3.15,Yes,39,8.08
+codeium vs copilot,Competitor Comparison,3991,5580,39.8,7,5,-2,82,128,2.48,2.27,Yes,71,13.34
+amazon codewhisperer alternative,Competitor Comparison,8579,12377,44.3,32,26,-6,352,435,3.68,3.61,Yes,79,6.39
+best ai coding assistant 2025,Competitor Comparison,9808,12539,27.8,3,1,-2,199,202,1.74,1.8,Yes,78,13.58
+copilot alternatives free,Competitor Comparison,8904,12790,43.6,7,4,-3,227,280,2.34,2.14,No,75,14.25
+cursor alternative,Competitor Comparison,4244,4997,17.8,32,34,2,127,97,2.53,2.41,Yes,50,10.12
+tabnine alternative,Competitor Comparison,11327,14500,28,12,9,-3,241,254,2.02,1.85,Yes,82,16.97
+codeium alternative,Competitor Comparison,11323,15258,34.8,26,24,-2,542,759,4.07,4.72,Yes,44,11.42
+supermaven vs copilot,Competitor Comparison,8333,9904,18.9,39,39,0,256,440,3.22,3.83,No,68,6.75
+continue dev alternative,Competitor Comparison,5607,6478,15.5,37,40,3,83,132,1.8,1.79,Yes,50,7.78
+aider alternative,Competitor Comparison,9806,11624,18.5,13,14,1,187,331,2.35,2.41,Yes,60,5.25
+windsurf vs cursor,Competitor Comparison,4004,5296,32.3,38,31,-7,115,209,3.21,3.44,No,56,15.81
+best ai code completion,Competitor Comparison,4940,6777,37.2,32,24,-8,177,240,3.54,3.71,Yes,37,16.38
+copilot competitors,Competitor Comparison,1895,2362,24.7,30,27,-3,88,107,4.38,4.57,Yes,40,9.45
+ai coding tool comparison,Competitor Comparison,8766,10026,14.4,25,29,4,323,306,3.31,3.07,Yes,63,17.94
+cursor pricing,Competitor Comparison,6229,7852,26.1,20,18,-2,150,262,2.82,3.19,Yes,62,3.8
+tabnine pricing,Competitor Comparison,2691,3330,23.8,7,3,-4,38,64,1.72,2.06,No,25,16.15
+codeium pricing,Competitor Comparison,11372,14727,29.5,8,3,-5,411,741,4.34,4.92,No,51,6.36
+copilot pricing comparison,Competitor Comparison,5768,6425,11.4,30,34,4,74,118,1.53,1.68,Yes,37,6.18
+ai code completion python,Use Case Specific,1004,1054,5,40,41,1,29,27,2.44,2.2,No,71,16.31
+ai code completion javascript,Use Case Specific,3433,4365,27.2,21,16,-5,108,140,3.81,3.62,Yes,39,9.55
+ai code completion typescript,Use Case Specific,1896,2056,8.4,13,13,0,72,58,3.24,2.97,No,48,12.11
+ai code completion rust,Use Case Specific,1645,1829,11.2,30,30,0,30,34,1.97,1.93,Yes,41,6.84
+ai code completion go,Use Case Specific,3008,3028,0.7,8,6,-2,93,122,3.21,3.45,No,34,16.96
+ai code completion java,Use Case Specific,1515,1869,23.4,13,9,-4,40,52,2.44,2.48,No,73,15.49
+ai code completion react,Use Case Specific,2133,2126,-0.3,8,8,0,38,48,1.59,1.91,Yes,77,11.57
+ai code completion vue,Use Case Specific,4136,5159,24.7,16,8,-8,136,246,3.86,4.58,Yes,25,12.91
+ai code completion angular,Use Case Specific,2323,2425,4.4,36,38,2,41,47,1.62,1.71,Yes,78,17.5
+ai code review github,Use Case Specific,3537,3859,9.1,25,28,3,145,174,3.69,4.03,Yes,63,4.61
+ai pull request review,Use Case Specific,1829,1988,8.7,36,36,0,55,71,2.97,3.08,No,54,12.14
+ai code documentation,Use Case Specific,2628,2631,0.1,12,9,-3,91,126,3.87,4.02,No,77,7.88
+ai unit test generator,Use Case Specific,4318,4618,7,25,28,3,131,149,2.95,3.01,No,28,5.32
+ai test case generator,Use Case Specific,2219,2787,25.6,34,27,-7,58,76,2.53,2.45,No,42,6.82
+ai code refactoring,Use Case Specific,4400,5025,14.2,14,12,-2,80,69,1.58,1.48,No,51,3.11
+ai bug detection,Use Case Specific,2796,3329,19.1,19,17,-2,86,86,2.7,2.5,No,76,5.74
+ai code security scanner,Use Case Specific,1138,1175,3.3,16,20,4,47,35,3.81,3.5,No,75,13.56
+ai code optimization,Use Case Specific,2146,2601,21.2,20,13,-7,72,80,3.61,3.68,Yes,79,8.35
+ai code explanation,Use Case Specific,1213,1509,24.4,27,19,-8,33,43,2.91,3.03,Yes,65,10.23
+ai legacy code modernization,Use Case Specific,2658,3210,20.8,42,34,-8,80,90,2.96,3,No,76,12.51
+vscode ai extension,Ide Specific,2261,2938,29.9,35,31,-4,40,52,2.11,2,Yes,28,15.69
+vscode copilot alternative,Ide Specific,4017,4828,20.2,5,1,-4,71,142,2.21,2.45,No,30,8.67
+jetbrains ai plugin,Ide Specific,4670,5772,23.6,40,34,-6,193,239,3.66,4.09,Yes,50,6.84
+intellij ai assistant,Ide Specific,1641,1673,2,14,17,3,58,51,3.28,3.7,No,35,16.95
+pycharm ai plugin,Ide Specific,2526,2726,7.9,7,10,3,76,83,2.98,2.87,No,44,6.45
+webstorm ai plugin,Ide Specific,2876,3331,15.8,37,39,2,82,143,3.4,3.93,No,74,4.43
+neovim ai plugin,Ide Specific,875,894,2.2,3,7,4,37,36,3.98,3.64,Yes,35,14.83
+vim ai completion,Ide Specific,1814,2240,23.5,28,25,-3,32,47,1.91,2.22,No,64,9.51
+sublime text ai,Ide Specific,4097,4787,16.8,17,14,-3,137,200,3.75,4.39,No,38,3.53
+atom ai plugin,Ide Specific,2651,2626,-0.9,9,8,-1,75,84,3.06,2.88,No,53,10.18
+eclipse ai assistant,Ide Specific,977,1197,22.6,35,31,-4,32,40,3.73,4.19,Yes,46,13.57
+visual studio ai,Ide Specific,2365,2926,23.7,38,34,-4,47,78,2.36,2.4,Yes,29,10.04
+android studio ai,Ide Specific,2871,3450,20.2,38,33,-5,103,139,3.31,3.57,No,34,7.81
+xcode ai assistant,Ide Specific,3705,4118,11.2,14,12,-2,95,113,2.5,2.63,No,71,13.75
+emacs ai completion,Ide Specific,3230,3707,14.8,39,43,4,131,152,3.83,4.33,No,33,9.07
+enterprise ai coding,Enterprise Terms,1252,1933,54.4,13,11,-2,48,73,4.52,4.39,No,60,4.43
+ai coding security compliance,Enterprise Terms,1024,1391,35.9,42,40,-2,55,67,5.66,5.19,No,76,14.71
+self hosted ai coding,Enterprise Terms,1136,1584,39.5,28,22,-6,60,74,4.57,4.75,No,51,9.51
+on premise ai code assistant,Enterprise Terms,1138,1786,56.9,26,18,-8,47,88,4.16,4.27,No,73,14.6
+soc2 ai coding tool,Enterprise Terms,1202,1508,25.5,23,15,-8,74,110,7.16,8.51,No,78,15.84
+hipaa compliant ai coding,Enterprise Terms,1286,1833,42.6,3,1,-2,110,189,8.98,9.24,No,56,9.76
+enterprise code completion,Enterprise Terms,628,968,54.3,21,14,-7,33,64,5.89,6.56,No,78,9.33
+team ai coding tool,Enterprise Terms,313,475,51.8,6,1,-5,18,31,6.49,5.98,No,34,6.7
+ai coding for teams,Enterprise Terms,361,454,25.9,30,23,-7,25,28,6.04,6.18,No,27,6.08
+ai coding sso,Enterprise Terms,642,936,45.8,39,33,-6,48,70,6.53,6.96,No,59,6.27
+ai coding audit logs,Enterprise Terms,1301,1993,53.2,18,13,-5,107,126,7.02,6.61,No,79,16.39
+private ai code assistant,Enterprise Terms,206,310,50.8,23,17,-6,12,27,7.17,8.33,No,42,16.34
+how to use ai for coding,Educational Content,8852,6327,-28.5,4,8,4,77,38,0.84,0.57,Yes,62,14.49
+ai coding tutorial,Educational Content,9083,8116,-10.6,26,28,2,74,70,0.72,0.75,Yes,56,9.09
+ai pair programming guide,Educational Content,5186,4332,-16.5,4,14,10,47,46,1.01,0.95,Yes,28,4.55
+ai code completion setup,Educational Content,12268,12823,4.5,20,24,4,69,84,0.67,0.72,Yes,41,8.78
+ai coding best practices,Educational Content,9141,11078,21.2,23,17,-6,141,177,1.33,1.55,Yes,36,12.31
+ai assisted development,Educational Content,10646,13236,24.3,4,1,-3,135,113,1.07,1.03,No,75,6.3
+learn ai coding,Educational Content,10340,11405,10.3,41,45,4,141,169,1.34,1.39,No,78,4.59
+ai coding workflow,Educational Content,9479,9108,-3.9,37,37,0,55,70,0.71,0.75,Yes,58,12.16
+ai coding tips,Educational Content,9617,9389,-2.4,27,28,1,62,52,0.61,0.63,No,27,3.71
+ai coding productivity,Educational Content,6203,6483,4.5,21,22,1,62,77,1.19,1.4,No,34,13.2
+ai code review process,Educational Content,9982,12830,28.5,33,29,-4,64,88,0.59,0.66,No,32,6.37
+ai testing automation,Educational Content,7387,9571,29.6,34,27,-7,55,84,0.72,0.87,No,46,16.69
+ai devops integration,Educational Content,14045,16936,20.6,10,3,-7,84,131,0.62,0.71,Yes,76,15.59
+speed up coding with ai,Problem Solution,4997,5874,17.6,26,25,-1,143,198,2.81,2.93,No,67,7.77
+reduce bugs with ai,Problem Solution,4778,5496,15,6,7,1,127,156,2.51,2.82,No,69,12.05
+faster code review ai,Problem Solution,4021,5044,25.5,15,11,-4,59,76,1.56,1.84,Yes,70,7.94
+automate code documentation,Problem Solution,2532,2830,11.8,12,14,2,61,79,2.5,2.57,No,54,2.55
+ai code quality,Problem Solution,4000,4202,5.1,39,36,-3,86,96,2.39,2.8,Yes,39,8.46
+reduce technical debt ai,Problem Solution,1463,1876,28.2,8,6,-2,34,44,2.05,2.42,No,37,17.83
+ai code maintainability,Problem Solution,1384,1373,-0.8,28,25,-3,43,52,3.58,4.06,Yes,29,12.26
+ai code readability,Problem Solution,1226,1562,27.5,44,38,-6,50,55,3.71,4.11,No,56,9.68
+ai coding efficiency,Problem Solution,1392,1611,15.8,36,35,-1,45,38,2.84,2.78,No,33,3.19
+developer productivity ai,Problem Solution,1855,1975,6.5,13,12,-1,26,24,1.59,1.55,No,83,13.71
+ai coding roi,Problem Solution,1413,1451,2.7,7,8,1,27,25,1.7,1.79,No,53,16.55
+ai coding time savings,Problem Solution,2091,2384,14,35,37,2,66,78,3.16,3.66,No,83,15.94
+free ai coding assistant for students,Long Tail Queries,780,806,3.4,38,41,3,39,41,4.67,4.47,No,69,16.01
+ai coding assistant offline mode,Long Tail Queries,130,129,-0.5,32,35,3,8,11,7.13,8.17,Yes,53,6.51
+ai code completion without sending code to cloud,Long Tail Queries,323,343,6.4,42,45,3,10,11,3.42,3.09,No,72,4.16
+local ai code assistant,Long Tail Queries,513,564,10.1,30,30,0,13,21,3.09,3.48,No,44,13.16
+ai coding assistant privacy,Long Tail Queries,341,343,0.8,19,17,-2,26,20,7.74,7.1,No,42,16.01
+ai coding assistant open source,Long Tail Queries,786,952,21.2,14,12,-2,50,81,7.84,8.99,Yes,56,14.44
+best ai coding assistant for beginners,Long Tail Queries,669,801,19.8,6,3,-3,16,28,3.01,3.47,Yes,53,13.25
+ai coding assistant for startups,Long Tail Queries,229,235,3.1,5,2,-3,18,16,6.86,6.24,Yes,71,9.01
+ai coding assistant for freelancers,Long Tail Queries,183,191,4.6,3,1,-2,10,8,4.99,4.83,No,73,12.6
+ai coding assistant monthly cost,Long Tail Queries,623,694,11.5,27,24,-3,30,37,5.81,5.5,No,74,14.3
+ai coding assistant trial,Long Tail Queries,486,511,5.3,5,5,0,37,31,6.98,7.29,No,41,11.91
+ai coding assistant discount,Long Tail Queries,620,695,12.2,4,8,4,24,28,4,4.78,Yes,45,3.62
+ai code helper,General,1643,1721,4.8,42,34,2,80,90,4.9,5.6,No,27,11.28
+coding assistant ai free,General,1411,1302,-7.7,36,17,7,19,18,1.41,1.25,Yes,59,1.63
+ai programmer tool,General,2343,2076,-11.4,45,15,-8,73,73,3.14,2.96,Yes,57,9.16
+ai dev assistant,General,2009,2403,19.7,46,46,8,86,121,4.29,3.64,No,28,14.14
+automatic code generation,General,3730,4313,15.6,16,10,-1,81,102,2.2,2.46,Yes,78,8.04
+ai syntax completion,General,758,983,29.7,26,28,-6,24,25,3.19,2.76,No,37,2.31
+ai error fixing,General,2434,2860,17.5,23,48,-5,71,91,2.92,3.35,No,51,8.23
+ai code formatter,General,3965,3411,-14,41,34,0,143,122,3.61,3.01,No,48,7.15
+ai linting tool,General,1530,1497,-2.1,34,23,-4,43,40,2.85,2.7,No,43,8.83
+ai code analysis,General,3294,3752,13.9,38,38,-7,90,107,2.75,3.08,No,70,9.5
+ai code metrics,General,1569,1615,3,22,42,6,39,36,2.54,2.82,No,49,3.93
+ai technical debt,General,1239,1284,3.6,41,7,-3,37,39,3.05,2.74,No,66,9.5
+ai code smell detection,General,2578,2654,3,10,19,-7,86,102,3.37,2.71,No,31,3.27
+ai design patterns,General,600,581,-3.1,14,5,5,11,10,1.94,1.9,No,60,7.32
+ai architecture suggestions,General,3647,4171,14.4,24,30,2,174,218,4.79,5.11,No,68,11.02
+ai api generation,General,2147,2453,14.3,48,22,9,96,131,4.47,3.8,Yes,45,2.03
+ai schema generation,General,2466,2373,-3.8,9,35,8,42,42,1.72,1.85,No,69,14.53
+ai database queries ai,General,425,563,32.6,43,33,6,15,20,3.56,3.33,No,42,1.9
+ai sql generation,General,607,729,20.2,12,52,-8,10,14,1.81,1.56,Yes,66,3.89
+ai graphql generation,General,3564,4522,26.9,14,32,9,170,194,4.78,5.41,No,68,1.91
+ai rest api builder,General,2163,2698,24.8,5,21,7,101,142,4.67,4.99,No,47,3.65
+ai microservices,General,1003,876,-12.6,45,27,7,49,47,4.91,4.1,Yes,30,13.36
+ai kubernetes yaml,General,3752,4624,23.3,23,8,-7,176,240,4.7,5.26,No,30,6.57
+ai docker compose,General,1121,1316,17.5,5,14,-2,25,31,2.31,2.2,No,52,4.71
+ai terraform,General,3868,4147,7.2,15,37,-1,40,46,1.06,1.11,No,22,8.82
+ai cloudformation,General,2675,2968,11,33,28,3,78,74,2.92,2.95,Yes,55,9.71
+ai ansible playbook,General,1243,1398,12.5,48,45,4,49,62,3.99,3.88,No,72,13.62
+ai ci cd pipeline,General,3140,3696,17.7,8,23,4,79,87,2.52,2.12,No,67,8.56
+ai github actions,General,2841,2851,0.4,39,10,7,119,100,4.21,4.58,No,32,7.08
+ai gitlab ci,General,3716,4129,11.1,48,12,-2,55,62,1.49,1.62,Yes,61,4
+ai jenkins pipeline,General,1251,1665,33.1,11,3,3,36,39,2.93,3.09,No,74,10.11
+code completion tool,General,1600,2067,29.2,13,17,1,30,34,1.91,1.81,No,43,6.27
+smart code suggestions,General,3525,3446,-2.2,28,21,-5,77,73,2.21,2.36,Yes,55,3.52
+ai autocomplete coding,General,1762,2014,14.3,39,46,-7,29,33,1.67,1.7,Yes,56,10.17
+intelligent ide,General,1287,1226,-4.7,13,16,4,45,45,3.55,3.55,No,54,9.56
+ai coding extension,General,1877,1997,6.4,15,41,5,72,65,3.87,4.22,No,58,11.93
+machine learning ide plugin,General,335,299,-10.7,7,11,-1,15,12,4.58,4.29,No,32,8.51
+neural code completion,General,1255,1568,25,25,10,-3,24,31,1.93,2.07,Yes,77,6
+deep learning code assistant,General,1453,1957,34.7,21,37,-7,52,69,3.65,3.4,No,77,14.43
+gpt coding tool,General,2168,2531,16.7,20,44,7,87,81,4.02,3.7,No,22,14.02
+llm code generation,General,536,487,-9,9,22,-1,26,26,4.9,4.39,No,39,9.92
+transformer code model,General,3325,4136,24.4,20,14,-3,148,159,4.46,3.68,Yes,42,5.05
+ai pair coder,General,1901,1977,4,13,3,2,45,53,2.39,2.18,No,37,8.46
+sourcegraph cody alternative,General,1742,2165,24.3,41,54,1,57,71,3.3,3.16,No,64,6.64
+replit ghostwriter alternative,General,3587,4003,11.6,7,18,-2,139,143,3.89,3.23,No,21,3.58
+codex alternative,General,3278,3353,2.3,14,27,-7,160,140,4.9,5.61,No,33,3.38
+chatgpt coding alternative,General,2683,3306,23.2,7,37,0,45,63,1.7,1.81,Yes,40,1.85
+claude coding alternative,General,836,807,-3.4,16,34,4,11,12,1.32,1.52,Yes,25,1.5
+gemini code alternative,General,342,396,16,23,33,-4,12,15,3.6,3.54,Yes,30,11.68
+devin ai alternative,General,2250,2694,19.8,23,11,-6,111,110,4.93,5.49,Yes,26,10.84
+cognition ai alternative,General,3111,3605,15.9,44,19,-4,109,133,3.53,3.26,No,79,12.95
+sourcegraph vs cursor,General,3434,4278,24.6,39,9,5,89,97,2.62,2.5,No,74,7.12
+cody vs copilot,General,2752,2365,-14,14,25,-2,56,50,2.04,1.9,No,64,14.67
+ghostwriter vs copilot,General,2685,2368,-11.8,21,37,8,31,28,1.17,1.15,No,74,3.51
+best ai ide 2025,General,2857,2642,-7.5,22,42,-6,65,57,2.3,2.2,No,40,14.41
+ai code completion c++,General,2972,3945,32.8,13,43,-8,123,183,4.15,3.44,Yes,69,2.02
+ai code completion c#,General,2579,2787,8.1,38,10,-1,91,88,3.55,4.1,No,64,3.53
+ai code completion php,General,1739,2337,34.4,12,15,-1,48,54,2.77,3.01,Yes,43,2.92
+ai code completion ruby,General,3388,4500,32.8,35,48,-5,133,167,3.95,4.38,No,47,6.29
+ai code completion swift,General,2789,2507,-10.1,36,10,1,101,73,3.64,3.03,No,50,12.06
+ai code completion kotlin,General,659,765,16.2,7,51,-5,16,20,2.53,2.81,No,77,7.96
+ai code completion scala,General,3114,4154,33.4,16,29,-1,130,147,4.19,4.17,No,35,12.46
+ai code completion elixir,General,3239,3006,-7.2,21,42,9,38,31,1.17,1.11,No,79,6.75
+ai code completion haskell,General,3997,5282,32.2,25,46,5,78,83,1.96,2.35,No,49,13.13
+ai frontend development,General,2844,2784,-2.1,25,15,-1,90,97,3.18,3.25,Yes,51,3.9
+ai backend development,General,897,1100,22.7,32,31,4,18,19,2.08,1.77,No,46,14.53
+ai fullstack development,General,1786,1969,10.3,17,24,2,77,94,4.36,4.79,No,73,9.13
+ai mobile app development,General,2760,2475,-10.3,29,39,6,91,70,3.31,3.39,No,63,11.31
+ai game development coding,General,748,739,-1.1,46,36,2,13,12,1.78,1.95,No,46,4.04
+ai data science coding,General,3284,3407,3.8,40,24,1,103,118,3.15,2.57,No,33,11.62
+gdpr compliant ai coding,General,3808,3937,3.4,35,8,-4,87,77,2.31,2.2,No,29,13.46
+fedramp ai coding tool,General,526,483,-8.1,44,41,1,19,18,3.65,3.44,No,39,6.93
+iso 27001 ai coding,General,2930,3195,9,28,39,7,104,101,3.57,3.86,Yes,43,10.63
+air gapped ai coding,General,893,1027,15.1,23,51,5,9,9,1.09,1.18,No,77,11.05
+vpn ai code assistant,General,3274,4133,26.3,49,38,8,100,124,3.08,2.57,Yes,78,12.32
+secure ai coding enterprise,General,1626,2193,34.9,49,35,8,76,109,4.73,4.73,Yes,34,7.03
+ai coding data residency,General,2425,2967,22.4,30,18,-4,96,102,3.96,3.74,Yes,32,10.95
+ai coding compliance,General,2185,2765,26.6,21,47,1,45,66,2.09,1.86,No,56,7.99
+regulated industry ai coding,General,3264,3522,7.9,10,28,-5,95,84,2.93,3.41,No,43,11.35
+what is ai coding,General,2161,1898,-12.1,48,33,-5,41,29,1.9,1.74,Yes,41,5.03
+ai coding explained,General,462,456,-1.2,14,18,7,19,20,4.15,4.07,No,63,3.61
+ai coding for dummies,General,1551,1344,-13.3,47,23,-5,19,15,1.25,1.39,Yes,34,1.79
+ai coding introduction,General,3574,4759,33.2,11,23,1,115,174,3.24,3.61,No,56,14.75
+ai coding getting started,General,1405,1296,-7.8,41,26,8,54,49,3.9,4.64,No,76,3.97
+ai coding overview,General,2508,2321,-7.4,46,9,-8,47,44,1.9,1.61,No,77,8.82
+benefits of ai coding,General,2770,3334,20.4,10,48,-3,87,120,3.17,3.08,Yes,41,12.97
+ai coding advantages,General,3437,3089,-10.1,43,24,3,152,113,4.45,4.47,No,29,14.7
+why use ai for coding,General,2590,3219,24.3,11,23,-5,46,64,1.81,1.82,Yes,40,10.4
+ai coding future,General,2975,3823,28.5,45,42,8,58,60,1.96,1.62,No,27,5.31
+ai coding trends 2025,General,1877,2062,9.9,27,27,9,26,24,1.42,1.39,Yes,31,8.56
+ai coding statistics,General,2855,3558,24.6,25,10,0,94,112,3.31,3.86,No,61,7.54
+ai coding case studies,General,3825,4768,24.7,7,47,-6,86,125,2.27,1.97,No,47,4.23
+ai coding success stories,General,3371,3478,3.2,47,39,-5,132,153,3.93,4.67,No,28,12.35
+ai coding examples,General,3161,3192,1,49,23,4,156,146,4.95,5.94,No,78,3.69
+fix bugs faster ai,General,1860,1667,-10.3,24,36,-4,20,22,1.12,1.04,Yes,57,8.8
+write code faster ai,General,2558,3145,23,6,49,3,126,153,4.95,4.67,No,22,13.38
+improve code quality ai,General,2121,1987,-6.3,30,35,-6,81,65,3.85,3.61,No,77,9.79
+reduce development time ai,General,2626,3047,16,9,46,2,63,83,2.41,2.17,Yes,35,2.94
+accelerate coding ai,General,782,933,19.3,43,8,0,9,12,1.28,1.53,Yes,22,10.87
+boost productivity coding ai,General,2244,2149,-4.2,25,37,5,54,57,2.44,2.84,Yes,28,12.14
+eliminate boilerplate code ai,General,1144,1486,29.9,10,29,-7,41,52,3.6,3.55,No,27,3.24
+automate repetitive coding,General,1982,2652,33.8,24,51,-1,28,41,1.44,1.68,Yes,67,11.05
+ai coding shortcuts,General,3993,5212,30.5,13,30,4,160,248,4.02,4.38,Yes,74,8.69
+ai coding assistant for data engineers,General,1086,1397,28.6,42,38,-1,15,18,1.45,1.19,No,71,5.57
+ai coding assistant for devops,General,1526,1353,-11.3,18,32,0,29,21,1.91,2.21,No,60,5.96
+ai coding assistant for frontend developers,General,1921,2489,29.6,20,31,8,33,39,1.74,1.69,Yes,65,13.05
+ai coding assistant for backend developers,General,2090,2464,17.9,41,5,3,41,41,2.01,1.68,No,23,13.23
+ai coding assistant for mobile developers,General,781,1007,28.9,49,25,6,25,27,3.29,3.83,No,34,9.63
+ai coding assistant linux,General,2373,2212,-6.8,25,53,-3,39,38,1.68,1.82,Yes,26,3.28
+ai coding assistant windows,General,1071,1116,4.2,26,46,-7,31,29,2.95,2.92,No,27,10.06
+ai coding assistant mac,General,3633,4707,29.6,16,8,-1,36,42,1.01,1,No,64,8.01
+ai coding assistant chromebook,General,1747,1895,8.5,24,51,4,48,53,2.79,3.19,Yes,27,2
+cheap ai coding tool,General,1191,1182,-0.8,46,45,0,33,32,2.85,2.38,No,43,8.68
+affordable ai coding assistant,General,3942,4350,10.4,17,13,5,177,234,4.5,3.83,Yes,20,6.76
+budget ai coding tool,General,318,335,5.6,49,14,7,14,14,4.63,5.04,No,24,1.52
+ai coding tool free trial,General,1158,985,-14.9,27,51,6,44,43,3.87,3.49,No,52,7.66
+ai coding tool demo,General,893,800,-10.4,44,22,8,30,22,3.39,2.82,No,58,7.07
+ai coding tool review 2025,General,404,473,17.3,17,12,5,18,22,4.55,5.3,No,47,3.82

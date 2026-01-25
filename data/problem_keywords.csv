@@ -1,0 +1,19 @@
+keyword,category,traffic_2024,traffic_2025,traffic_change_pct,position_2024,position_2025,position_change,signups_2024,signups_2025,conversion_rate_2024,conversion_rate_2025,ai_overview_triggered,difficulty_score,cpc_usd
+ai devops integration,Educational Content,14045,16936,20.6,10,3,-7,84,131,0.62,0.71,Yes,76,15.59
+ai assisted development,Educational Content,10646,13236,24.3,4,1,-3,135,113,1.07,1.03,No,75,6.3
+ai code review process,Educational Content,9982,12830,28.5,33,29,-4,64,88,0.59,0.66,No,32,6.37
+ai code completion setup,Educational Content,12268,12823,4.5,20,24,4,69,84,0.67,0.72,Yes,41,8.78
+learn ai coding,Educational Content,10340,11405,10.3,41,45,4,141,169,1.34,1.39,No,78,4.59
+ai testing automation,Educational Content,7387,9571,29.6,34,27,-7,55,84,0.72,0.87,No,46,16.69
+ai coding tips,Educational Content,9617,9389,-2.4,27,28,1,62,52,0.61,0.63,No,27,3.71
+ai coding workflow,Educational Content,9479,9108,-3.9,37,37,0,55,70,0.71,0.75,Yes,58,12.16
+ai coding tutorial,Educational Content,9083,8116,-10.6,26,28,2,74,70,0.72,0.75,Yes,56,9.09
+ai coding productivity,Educational Content,6203,6483,4.5,21,22,1,62,77,1.19,1.4,No,34,13.2
+how to use ai for coding,Educational Content,8852,6327,-28.5,4,8,4,77,38,0.84,0.57,Yes,62,14.49
+ai code refactoring,Use Case Specific,4400,5025,14.2,14,12,-2,80,69,1.58,1.48,No,51,3.11
+ai coding assistant mac,General,3633,4707,29.6,16,8,-1,36,42,1.01,1,No,64,8.01
+ai pair programming guide,Educational Content,5186,4332,-16.5,4,14,10,47,46,1.01,0.95,Yes,28,4.55
+ai terraform,General,3868,4147,7.2,15,37,-1,40,46,1.06,1.11,No,22,8.82
+ai code completion elixir,General,3239,3006,-7.2,21,42,9,38,31,1.17,1.11,No,79,6.75
+ghostwriter vs copilot,General,2685,2368,-11.8,21,37,8,31,28,1.17,1.15,No,74,3.51
+ai coding trends 2025,General,1877,2062,9.9,27,27,9,26,24,1.42,1.39,Yes,31,8.56
