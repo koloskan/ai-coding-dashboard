@@ -245,6 +245,7 @@ function Dashboard({ latestMetric, isConnected, isLoading, monthlyMetrics, regio
         latestMetric={latestMetric}
         isConnected={isConnected}
         isLoading={isLoading}
+        monthlyMetrics={monthlyMetrics}
       />
 
       {/* Critical Alerts Section */}

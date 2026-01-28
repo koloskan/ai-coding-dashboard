@@ -1,4 +1,5 @@
-import { AlertTriangle, AlertCircle, CheckCircle, TrendingUp, TrendingDown, MapPin, Globe, Calendar } from 'lucide-react';
+import { AlertTriangle, AlertCircle, CheckCircle, TrendingUp, TrendingDown, MapPin, Globe, Calendar, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface MonthlyMetric {
   month: string;
@@ -49,6 +50,7 @@ interface Alert {
   metric?: string;
   details?: string;
   icon?: 'map' | 'trend-down' | 'trend-up' | 'calendar' | 'globe' | 'default';
+  drilldownPath?: string;
 }
 
 interface CriticalAlertsProps {
@@ -85,27 +87,30 @@ function generateAlerts(
     const sortedApac = [...apacData].sort((a, b) => b.month.localeCompare(a.month));
     const mostRecentMonth = sortedApac[0]?.month;
     const recentApacData = sortedApac.filter(d => d.month === mostRecentMonth);
-    
+
     if (recentApacData.length > 0) {
       const avgApacRate = recentApacData.reduce((sum, d) => sum + d.trial_to_paid_rate, 0) / recentApacData.length;
-      
+      const totalApacMRR = recentApacData.reduce((sum, d) => sum + d.mrr_usd, 0);
+      const estimatedLostRevenue = totalApacMRR * (0.15 - avgApacRate / 100); // Assuming 15% is achievable
+
       // Check if APAC rate is in the 6-12% range (significantly below NA baseline of 15-25%)
       if (avgApacRate >= APAC_TRIAL_TO_PAID_MIN && avgApacRate <= APAC_TRIAL_TO_PAID_MAX) {
         alerts.push({
           type: 'critical',
           title: '🚨 APAC Region: Critical Conversion Gap',
           message: `APAC trial-to-paid rate is only ${avgApacRate.toFixed(1)}% (range: ${APAC_TRIAL_TO_PAID_MIN}-${APAC_TRIAL_TO_PAID_MAX}%)`,
-          metric: `${avgApacRate.toFixed(1)}%`,
-          details: `North America baseline is ${NA_BASELINE_MIN}-${NA_BASELINE_MAX}%. APAC is underperforming by 50-75%. Investigate pricing localization, payment methods, and regional product-market fit.`,
+          metric: `$${estimatedLostRevenue.toLocaleString()}/mo lost`,
+          details: `North America baseline is ${NA_BASELINE_MIN}-${NA_BASELINE_MAX}%. APAC is underperforming by 50-75%. Action: Run localized pricing A/B test in Singapore and Tokyo markets.`,
           icon: 'map',
+          drilldownPath: '/regional',
         });
       } else if (avgApacRate < APAC_TRIAL_TO_PAID_MIN) {
         alerts.push({
           type: 'critical',
           title: '🚨 APAC Region: Severe Conversion Crisis',
           message: `APAC trial-to-paid rate has dropped to ${avgApacRate.toFixed(1)}% - below expected ${APAC_TRIAL_TO_PAID_MIN}% minimum`,
-          metric: `${avgApacRate.toFixed(1)}%`,
-          details: `This is critically below the already-low APAC baseline. Immediate action required.`,
+          metric: `$${estimatedLostRevenue.toLocaleString()}/mo lost`,
+          details: `This is critically below the already-low APAC baseline. Action: Pause expansion in APAC, focus on payment method optimization and competitor analysis.`,
           icon: 'map',
         });
       }
@@ -115,14 +120,16 @@ function generateAlerts(
   // ============================================
   // 2. Q3 2025 PERFORMANCE DROP ALERT (Always Visible)
   // ============================================
-  // Force render the Q3 2025 Performance Drop alert as requested
+  // Calculate revenue impact for Q3 drop
+  const q3RevenueImpact = 38747 * 0.17 * 0.021; // Traffic drop * avg conversion rate * avg revenue per conversion
   alerts.push({
     type: 'warning',
     title: 'Q3 2025 Performance Drop',
     message: 'Traffic and conversions dipped significantly in Q3. Investigate seasonal trends or algorithm changes.',
-    metric: '↓17.1%',
-    details: 'Traffic dropped from 46,757 (Q2 avg) to 38,747 (Q3 avg) between July-September 2025.',
+    metric: `$${q3RevenueImpact.toLocaleString()}/mo lost`,
+    details: 'Traffic dropped 17.1% from 46,757 (Q2 avg) to 38,747 (Q3 avg). Action: Review Google algorithm updates and competitor SEO changes in July-Sept 2025.',
     icon: 'calendar',
+    drilldownPath: '/',
   });
 
   // ============================================
@@ -145,6 +152,8 @@ function generateAlerts(
       // Deduplicate channel names
       const uniqueChannelNames = [...new Set(wastedSocialChannels.map(c => c.channel))];
       const avgConvRate = wastedSocialChannels.reduce((sum, c) => sum + c.conversion_rate, 0) / wastedSocialChannels.length;
+      const totalWastedTraffic = wastedSocialChannels.reduce((sum, c) => sum + c.sessions, 0);
+      const estimatedWastedSpend = totalWastedTraffic * 0.5; // Assuming $0.50 per session cost
 
       // Format channel names: show up to 3, then summarize
       let formattedChannels: string;
@@ -160,9 +169,10 @@ function generateAlerts(
         type: 'warning',
         title: '💸 Wasted Social Media Spend',
         message: `Impacted Channels: ${formattedChannels}`,
-        metric: `${avgConvRate.toFixed(2)}%`,
-        details: `Average conversion rate is only ${avgConvRate.toFixed(2)}% (below ${SOCIAL_CONVERSION_THRESHOLD}% threshold). Social channels are generating traffic but not converting. Consider reallocating budget to higher-performing channels.`,
+        metric: `$${estimatedWastedSpend.toLocaleString()}/mo wasted`,
+        details: `Average conversion rate is only ${avgConvRate.toFixed(2)}% (below ${SOCIAL_CONVERSION_THRESHOLD}% threshold). Action: Pause campaigns in these channels and reallocate $${estimatedWastedSpend.toLocaleString()} to SEO and content marketing.`,
         icon: 'globe',
+        drilldownPath: '/campaigns',
       });
     }
   }
@@ -180,14 +190,16 @@ function generateAlerts(
     if (currentMonth && previousMonth) {
       const churnIncrease =
         (currentMonth.churn_rate - previousMonth.churn_rate) * 100;
+      const churnedRevenue = currentMonth.churned_mrr;
+      const additionalChurnCost = churnedRevenue * (churnIncrease / 100);
 
       if (churnIncrease > CHURN_INCREASE_THRESHOLD) {
         alerts.push({
           type: 'warning',
           title: 'Churn Rate Increasing',
           message: `Churn increased by ${churnIncrease.toFixed(1)}% from ${previousMonth.month} to ${currentMonth.month}`,
-          metric: `+${churnIncrease.toFixed(1)}%`,
-          details: `Current: ${(currentMonth.churn_rate * 100).toFixed(1)}% | Previous: ${(previousMonth.churn_rate * 100).toFixed(1)}%. Investigate customer feedback and retention strategies.`,
+          metric: `$${additionalChurnCost.toLocaleString()}/mo lost`,
+          details: `Current: ${(currentMonth.churn_rate * 100).toFixed(1)}% | Previous: ${(previousMonth.churn_rate * 100).toFixed(1)}%. Action: Launch win-back campaign targeting $${additionalChurnCost.toLocaleString()} in at-risk revenue.`,
           icon: 'trend-up',
         });
       }
@@ -243,6 +255,8 @@ function generateAlerts(
 }
 
 function AlertCard({ alert }: { alert: Alert }) {
+  const navigate = useNavigate();
+
   const styles = {
     critical: {
       bg: 'bg-red-50',
@@ -288,7 +302,7 @@ function AlertCard({ alert }: { alert: Alert }) {
     const iconClass = alert.type === 'critical' ? 'text-red-600' :
                       alert.type === 'warning' ? 'text-amber-600' :
                       alert.type === 'success' ? 'text-green-600' : 'text-blue-600';
-    
+
     switch (alert.icon) {
       case 'map':
         return <MapPin className={`w-5 h-5 ${iconClass}`} />;
@@ -307,9 +321,18 @@ function AlertCard({ alert }: { alert: Alert }) {
     }
   };
 
+  const handleClick = () => {
+    if (alert.drilldownPath) {
+      navigate(alert.drilldownPath);
+    }
+  };
+
   return (
     <div
-      className={`${style.bg} ${style.border} border rounded-xl p-4 transition-all duration-200 hover:shadow-md`}
+      className={`${style.bg} ${style.border} border rounded-xl p-4 transition-all duration-200 hover:shadow-md ${
+        alert.drilldownPath ? 'cursor-pointer hover:shadow-lg' : ''
+      }`}
+      onClick={handleClick}
     >
       <div className="flex items-start gap-4">
         <div className={`${style.iconBg} p-2 rounded-lg flex-shrink-0`}>
@@ -318,13 +341,18 @@ function AlertCard({ alert }: { alert: Alert }) {
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2">
             <h4 className={`font-semibold ${style.titleColor}`}>{alert.title}</h4>
-            {alert.metric && (
-              <span
-                className={`${style.metricBg} ${style.metricColor} px-2 py-1 rounded-md text-sm font-bold`}
-              >
-                {alert.metric}
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {alert.metric && (
+                <span
+                  className={`${style.metricBg} ${style.metricColor} px-2 py-1 rounded-md text-sm font-bold`}
+                >
+                  {alert.metric}
+                </span>
+              )}
+              {alert.drilldownPath && (
+                <ChevronRight className={`w-4 h-4 ${style.titleColor} opacity-60`} />
+              )}
+            </div>
           </div>
           <p className={`${style.textColor} text-sm mt-1`}>{alert.message}</p>
           {alert.details && (

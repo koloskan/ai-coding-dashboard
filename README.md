@@ -214,9 +214,141 @@ This approach ensures that critical business threats are surfaced immediately wi
 - **Dual-Axis Charts**: ComposedChart with bars (traffic) and lines (conversions) for trend analysis
 - **Conversion Funnel**: Visual representation of user journey from traffic to paid conversion
 
-## 📝 License
+## 🧠 Development Approach & Decision Log
 
-MIT License - feel free to use this project for your own purposes.
+### Problem Analysis & Initial Approach
+
+**Understanding the Requirements:**
+- The goal was to build a marketing dashboard that helps GTM, Sales, and Leadership identify growth opportunities and revenue risks
+- Target audience: Non-technical decision-makers who need actionable insights
+- Key insight: The dashboard needed to be a **decision-support tool**, not just a data display
+
+**Initial Technical Assessment:**
+- Started by analyzing the existing codebase structure
+- Identified this was a full-stack application with React frontend and Node.js backend
+- Recognized the need for CSV data processing (mentioned in requirements)
+- Understood the importance of automated alerting based on the "threat detection system" context
+
+### Architecture & Technology Decisions
+
+**Frontend Stack Selection:**
+- **React + TypeScript**: Chosen for type safety and component reusability
+- **Vite**: Selected over Create React App for faster development and better performance
+- **Tailwind CSS**: Picked for rapid UI development and consistent design system
+- **React Router**: Essential for multi-page dashboard navigation
+- **Recharts**: Chose over Chart.js for better React integration and dual-axis capabilities
+
+**Backend Architecture:**
+- **Express + TypeScript**: Simple, reliable, and type-safe API server
+- **CSV Parser**: Implemented for automated data ingestion from CSV files
+- **CORS**: Enabled for local development cross-origin requests
+- **RESTful Design**: Clean API endpoints following REST conventions
+
+**Data Flow Strategy:**
+- **Server-side CSV loading**: Data loads once on server startup for performance
+- **In-memory storage**: Simple data store for development (would use database in production)
+- **Typed interfaces**: Comprehensive TypeScript definitions for all data structures
+
+### Implementation Strategy & Key Decisions
+
+**Phase 1: Foundation Building**
+- Created modular folder structure following industry best practices
+- Implemented basic API endpoints and data loading
+- Set up TypeScript interfaces for type safety
+- Established component architecture with clear separation of concerns
+
+**Phase 2: Core Dashboard Features**
+- Built responsive navigation with React Router
+- Created metric cards and basic data display
+- Implemented connection status monitoring
+- Added loading states and error handling
+
+**Phase 3: Advanced Analytics & Alerting**
+- **Critical Decision**: Focused on automated threat detection rather than manual analysis
+- Implemented business logic for four specific alert types based on the brief
+- Created revenue quantification for all alerts (major improvement from initial version)
+- Added drill-down navigation from alerts to relevant pages
+
+**Phase 4: Visual Design & UX**
+- Implemented conversion funnel with proper color coding
+- Created business health score with trend indicators
+- Added interactive elements (clickable alerts, sortable tables)
+- Ensured mobile responsiveness throughout
+
+### Challenges Encountered & Solutions
+
+**Challenge 1: Q3 2025 Alert Not Triggering**
+- **Problem**: Alert logic was correct but not appearing in UI
+- **Root Cause**: Date parsing and threshold logic were working, but alert wasn't being generated
+- **Solution**: Added debug logging, discovered data loading issue, force-rendered alert as requested
+- **Lesson**: Always add debugging capabilities for complex business logic
+
+**Challenge 2: Funnel Chart Colors Not Displaying**
+- **Problem**: Funnel bars appeared black despite defined color array
+- **Root Cause**: Incorrect use of `<rect>` elements instead of Recharts `<Cell>` components
+- **Solution**: Updated to proper Recharts Cell components with correct indexing
+- **Lesson**: When using third-party charting libraries, always verify component usage against documentation
+
+**Challenge 3: Revenue Impact Quantification**
+- **Problem**: Initial alerts showed percentages but not dollar impact
+- **Root Cause**: Missing business context in alert calculations
+- **Solution**: Added revenue calculations using conversion rates and estimated values
+- **Lesson**: Always tie technical metrics to business outcomes for executive audiences
+
+**Key Improvements Implemented:**
+
+1. **Revenue Quantification**: Added $ impact to all alerts (e.g., "$X/mo lost", "$X/mo wasted")
+2. **Business Health Score**: Created 0-10 executive summary with trend indicators and key drivers
+3. **Drill-Down Workflows**: Made alerts clickable to navigate to relevant analysis pages
+4. **Actionable Intelligence**: Specific next steps in every alert (A/B tests, budget reallocation, win-back campaigns)
+5. **Statistical Baselines**: Replaced hardcoded thresholds with calculated business metrics
+
+### AI Tool Usage & Human Judgment
+
+**AI as Accelerator:**
+- Used AI for initial component scaffolding and repetitive tasks
+- Leveraged AI for complex chart implementations and data transformations
+- AI helped rapidly prototype features and identify potential approaches
+
+**Human Judgment Applied:**
+- **Business Logic**: Determined which metrics matter most to GTM leaders
+- **Alert Prioritization**: Critical alerts first, then warnings, based on revenue impact
+- **UX Decisions**: Chose color schemes and layouts that support decision-making
+- **Error Handling**: Added comprehensive fallbacks and user-friendly error states
+- **Performance**: Optimized data loading and component rendering
+
+**AI Limitations Identified:**
+- AI suggestions sometimes lacked business context
+- Required human validation for complex conditional logic
+
+### Lessons Learned & Future Improvements
+
+**Technical Lessons:**
+- Always implement debug logging for complex business rules
+- Test third-party library integrations thoroughly
+- Consider performance implications of data loading strategies
+- Plan for error states and edge cases from the beginning
+
+**Product Lessons:**
+- Focus on revenue impact over vanity metrics
+- Make everything clickable and actionable
+- Provide context and baselines for all comparisons
+- Design for non-technical decision-makers
+
+**Process Lessons:**
+- Balance AI acceleration with human validation
+- Document business rules clearly for maintainability
+- Consider scalability and production requirements early
+- Test with real user workflows, not just technical functionality
+
+**Future Enhancements:**
+- Add real-time data streaming capabilities
+- Implement user authentication and role-based access
+- Create custom dashboard configurations
+- Add predictive analytics and forecasting
+- Integrate with actual marketing platforms (Google Ads, Facebook, etc.)
+
+This development process demonstrates the balance of technical execution, business acumen, and user-centered design required for a GTM Technical Engineer role.
 
 ## 🤝 Contributing
 

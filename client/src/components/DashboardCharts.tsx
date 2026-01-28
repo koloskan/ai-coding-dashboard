@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
   BarChart,
+  Cell,
 } from 'recharts';
 import { TrendingUp, Filter } from 'lucide-react';
 
@@ -170,7 +171,7 @@ export default function DashboardCharts({ monthlyMetrics, isLoading }: Dashboard
             <TrendingUp className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Traffic & Conversions Trend</h3>
+            <h3 className="text-lg font-semibold" style={{ color: funnelColors[0] }}>Traffic & Conversions Trend</h3>
             <p className="text-sm text-gray-500">Last 12 months performance</p>
           </div>
         </div>
@@ -253,7 +254,7 @@ export default function DashboardCharts({ monthlyMetrics, isLoading }: Dashboard
             <Filter className="w-5 h-5 text-violet-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Conversion Funnel</h3>
+            <h3 className="text-lg font-semibold" style={{ color: funnelColors[3] }}>Conversion Funnel</h3>
             <p className="text-sm text-gray-500">
               {latestMetric ? formatMonth(latestMetric.month) : 'Latest month'} - User journey stages
             </p>
@@ -300,7 +301,7 @@ export default function DashboardCharts({ monthlyMetrics, isLoading }: Dashboard
                 radius={[8, 8, 0, 0]}
               >
                 {funnelData.map((_, index) => (
-                  <rect key={`bar-${index}`} fill={funnelColors[index]} />
+                  <Cell key={`cell-${index}`} fill={funnelColors[index % funnelColors.length]} />
                 ))}
               </Bar>
             </BarChart>
