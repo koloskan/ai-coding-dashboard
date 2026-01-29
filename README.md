@@ -6,9 +6,81 @@ A full-stack marketing dashboard application for tracking and analyzing marketin
 
 - **Campaign Management**: Track and manage marketing campaigns across Google, Facebook, Instagram, Twitter, and LinkedIn
 - **Real-time Analytics**: View impressions, clicks, conversions, and ROI metrics
-- **Interactive Charts**: Visualize data with Chart.js powered graphs
+- **Interactive Charts**: Visualize data with Recharts powered graphs
 - **Responsive Design**: Built with Tailwind CSS for a modern, mobile-friendly interface
 - **RESTful API**: Express backend with TypeScript for type-safe development
+- **Filterable/Sortable Tables**: Advanced data tables for keywords, regions, and channels
+- **Geographic Drill-Down**: Navigate from region → country → city for detailed analysis
+- **Automated Alerts**: AI-powered threat detection for business risks
+- **Business Health Score**: 0-10 scoring system for overall business performance
+
+## ✨ Recent Improvements
+
+### Filterable/Sortable Tables
+
+#### Keywords Table ([`ProblemKeywordsTable.tsx`](client/src/components/ProblemKeywordsTable.tsx))
+- **Search**: Filter keywords by name or category
+- **Category Filter**: Dropdown to filter by keyword category
+- **Issue Type Filter**: Filter by Wasted Traffic, AI Cannibalized, AI Triggered, Educational
+- **Multi-column Sorting**: Sort by Traffic, YoY Change, Conversion Rate
+- **Quick Filter Pills**: One-click filtering for common issues
+- **Wasted Traffic Detection**: Highlights keywords with high traffic but low conversion (>2K traffic, <1.5% conversion)
+- **AI Overview Impact**: Shows AI cannibalization risk for educational content
+
+#### Regional Table ([`RegionalTable.tsx`](client/src/components/RegionalTable.tsx))
+- **Geographic Drill-Down**: Navigate from Region → Country → City
+- **Breadcrumb Navigation**: Easy back-navigation through drill levels
+- **Sortable Columns**: Name, Traffic, Conversions, Conversion Rate, MRR
+- **Search**: Search across all geographic levels
+- **Low Conversion Alerts**: Highlights regions with conversion rates below 10%
+- **Aggregated Metrics**: Shows totals and averages at each drill level
+
+#### Channels Table ([`ChannelsTable.tsx`](client/src/components/ChannelsTable.tsx))
+- **Summary View**: Aggregated channel performance overview
+- **Monthly View**: Detailed monthly breakdown per channel
+- **Wasted Spend Detection**: Identifies channels with high sessions but low conversion
+- **Trend Analysis**: Shows performance trends (Up/Down/Stable)
+- **Sortable Columns**: Channel, Sessions, Signups, Conversion Rate, Bounce Rate
+- **Filter Options**: Show only wasted spend channels
+
+### Geographic Breakdown (Region/Country/City Drill-Down)
+
+The Regional Performance page now supports full geographic drill-down:
+
+1. **Region Level**: View all regions with aggregated metrics
+2. **Country Level**: Click a region to see countries within that region
+3. **City Level**: Click a country to see cities within that country
+
+Each level shows:
+- Total Traffic (organic/paid breakdown)
+- Trials Started
+- Paid Conversions
+- Conversion Rate
+- MRR
+
+### Alerts & Highlights for Problem Areas
+
+The dashboard automatically detects and highlights problem areas:
+
+#### 🚨 APAC Regional Conversion Gap
+- Monitors APAC region's trial-to-paid conversion rate
+- Alerts when rate falls within 6-12% (vs NA baseline of 15-25%)
+- Quantifies revenue impact (e.g., "$X/mo lost")
+
+#### 📉 Q3 2025 Performance Dip
+- Compares Q3 2025 metrics against Q2 2025 baseline
+- Alerts on traffic drop >5%, conversion drop >5%, or churn spike >10%
+- Provides actionable recommendations
+
+#### 🤖 AI Overview Cannibalization
+- Identifies educational keywords declining 10-35% YoY
+- Highlights keywords with AI Overview triggered
+- Suggests pivot to transactional/comparison keywords
+
+#### 💸 Wasted Social Media Spend
+- Monitors social channel conversion rates
+- Alerts when conversion rate falls below 2%
+- Quantifies wasted budget and suggests reallocation
 
 ## 📁 Project Structure
 
@@ -17,6 +89,13 @@ marketing-dashboard/
 ├── client/                 # React Frontend (Vite + TypeScript + Tailwind)
 │   ├── src/
 │   │   ├── components/    # Reusable React components
+│   │   │   ├── DashboardHeader.tsx    # KPI cards + Business Health Score
+│   │   │   ├── CriticalAlerts.tsx     # Automated threat detection alerts
+│   │   │   ├── DashboardCharts.tsx    # Trend charts + funnel visualization
+│   │   │   ├── ProblemKeywordsTable.tsx  # Filterable keywords analysis
+│   │   │   ├── RegionalTable.tsx      # Geographic drill-down table
+│   │   │   ├── ChannelsTable.tsx      # Channel performance table
+│   │   │   └── HelpModal.tsx          # User guide modal
 │   │   ├── pages/         # Page components
 │   │   ├── hooks/         # Custom React hooks
 │   │   ├── services/      # API service functions
@@ -28,15 +107,17 @@ marketing-dashboard/
 │   ├── src/
 │   │   ├── routes/        # API route handlers
 │   │   ├── controllers/   # Request handlers
-│   │   ├── middleware/    # Custom middleware
+│   │   ├── data/          # CSV loader and data store
 │   │   ├── types/         # TypeScript definitions
 │   │   └── utils/         # Utility functions
 │   └── ...
 │
-├── data/                   # Mock data for development
-│   ├── campaigns.json     # Sample campaign data
-│   ├── analytics.json     # Sample analytics data
-│   └── README.md          # Data documentation
+├── data/                   # CSV data files
+│   ├── monthly_metrics.csv     # Monthly performance metrics
+│   ├── regional_performance.csv # Geographic performance data
+│   ├── keywords.csv            # Keyword performance data
+│   ├── channel_performance.csv # Channel performance data
+│   └── README.md               # Data documentation
 │
 └── plans/                  # Project planning documents
 ```
@@ -50,7 +131,8 @@ marketing-dashboard/
 - **Tailwind CSS** - Utility-first CSS framework
 - **React Router v6** - Client-side routing
 - **Axios** - HTTP client
-- **Chart.js** - Data visualization
+- **Recharts** - Data visualization (ComposedChart, BarChart)
+- **Lucide React** - Icons
 
 ### Backend
 - **Node.js** - Runtime environment
