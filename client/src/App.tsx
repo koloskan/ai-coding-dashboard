@@ -6,6 +6,8 @@ import DashboardHeader from './components/DashboardHeader';
 import CriticalAlerts from './components/CriticalAlerts';
 import DashboardCharts from './components/DashboardCharts';
 import ProblemKeywordsTable from './components/ProblemKeywordsTable';
+import RegionalTable from './components/RegionalTable';
+import ChannelsTable from './components/ChannelsTable';
 import HelpModal from './components/HelpModal';
 
 // API base URL
@@ -357,63 +359,16 @@ interface RegionalPageProps {
 }
 
 function RegionalPage({ regionalPerformance, isLoading }: RegionalPageProps) {
-  // Group by region
-  const regionSummary = regionalPerformance.reduce((acc, r) => {
-    if (!acc[r.region]) {
-      acc[r.region] = {
-        totalTraffic: 0,
-        totalTrials: 0,
-        totalConversions: 0,
-        totalMRR: 0,
-        count: 0,
-      };
-    }
-    acc[r.region].totalTraffic += r.total_traffic;
-    acc[r.region].totalTrials += r.trials_started;
-    acc[r.region].totalConversions += r.paid_conversions;
-    acc[r.region].totalMRR += r.mrr_usd;
-    acc[r.region].count += 1;
-    return acc;
-  }, {} as Record<string, { totalTraffic: number; totalTrials: number; totalConversions: number; totalMRR: number; count: number }>);
-
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Regional Performance</h2>
-        <p className="text-gray-600 mb-6">
-          Geographic performance data and market analysis by region.
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Regional Performance</h2>
+        <p className="text-gray-600">
+          Geographic performance data with drill-down from region → country → city.
         </p>
-
-        {isLoading ? (
-          <div className="animate-pulse space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-20 bg-gray-100 rounded-lg"></div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Object.entries(regionSummary).map(([region, data]) => (
-              <div key={region} className="p-4 bg-gray-50 rounded-lg border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-2">{region}</h3>
-                <div className="space-y-1 text-sm">
-                  <p className="text-gray-600">
-                    Traffic: <span className="font-medium text-gray-900">{data.totalTraffic.toLocaleString()}</span>
-                  </p>
-                  <p className="text-gray-600">
-                    Trials: <span className="font-medium text-gray-900">{data.totalTrials.toLocaleString()}</span>
-                  </p>
-                  <p className="text-gray-600">
-                    Conversions: <span className="font-medium text-gray-900">{data.totalConversions.toLocaleString()}</span>
-                  </p>
-                  <p className="text-gray-600">
-                    MRR: <span className="font-medium text-green-600">${data.totalMRR.toLocaleString()}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
+      
+      <RegionalTable regionalPerformance={regionalPerformance} isLoading={isLoading} />
     </div>
   );
 }
@@ -424,157 +379,16 @@ interface CampaignsPageProps {
 }
 
 function CampaignsPage({ channelPerformance, isLoading }: CampaignsPageProps) {
-  // Group by channel and calculate totals
-  const channelSummary = channelPerformance.reduce((acc, c) => {
-    if (!acc[c.channel]) {
-      acc[c.channel] = {
-        totalSessions: 0,
-        totalSignups: 0,
-        avgConversionRate: 0,
-        avgBounceRate: 0,
-        avgSessionDuration: 0,
-        count: 0,
-      };
-    }
-    acc[c.channel].totalSessions += c.sessions;
-    acc[c.channel].totalSignups += c.signups;
-    acc[c.channel].avgConversionRate += c.conversion_rate;
-    acc[c.channel].avgBounceRate += c.bounce_rate;
-    acc[c.channel].avgSessionDuration += c.avg_session_duration_sec;
-    acc[c.channel].count += 1;
-    return acc;
-  }, {} as Record<string, { totalSessions: number; totalSignups: number; avgConversionRate: number; avgBounceRate: number; avgSessionDuration: number; count: number }>);
-
-  // Calculate averages
-  Object.keys(channelSummary).forEach(channel => {
-    const data = channelSummary[channel];
-    data.avgConversionRate = data.avgConversionRate / data.count;
-    data.avgBounceRate = data.avgBounceRate / data.count;
-    data.avgSessionDuration = data.avgSessionDuration / data.count;
-  });
-
-  // Sort channels by total sessions
-  const sortedChannels = Object.entries(channelSummary)
-    .sort(([, a], [, b]) => b.totalSessions - a.totalSessions);
-
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Campaigns & Channel Performance</h2>
         <p className="text-gray-600">
-          Channel performance metrics and campaign analytics.
+          Channel performance metrics with filtering and monthly breakdown.
         </p>
       </div>
-
-      {isLoading ? (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-          <div className="animate-pulse space-y-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-24 bg-gray-100 rounded-lg"></div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* Channel Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sortedChannels.map(([channel, data]) => {
-              const isLowConversion = data.avgConversionRate < 2;
-              return (
-                <div
-                  key={channel}
-                  className={`bg-white rounded-xl shadow-sm border p-6 ${
-                    isLowConversion ? 'border-red-200 bg-red-50' : 'border-gray-100'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-semibold text-gray-900">{channel}</h3>
-                    {isLowConversion && (
-                      <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-full">
-                        Low Conversion
-                      </span>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-gray-500">Sessions</p>
-                      <p className="text-lg font-bold text-gray-900">
-                        {data.totalSessions.toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Signups</p>
-                      <p className="text-lg font-bold text-gray-900">
-                        {data.totalSignups.toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Conversion Rate</p>
-                      <p className={`text-lg font-bold ${isLowConversion ? 'text-red-600' : 'text-green-600'}`}>
-                        {data.avgConversionRate.toFixed(2)}%
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Bounce Rate</p>
-                      <p className="text-lg font-bold text-gray-900">
-                        {data.avgBounceRate.toFixed(1)}%
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <p className="text-sm text-gray-500">
-                      Avg Session Duration: <span className="font-medium text-gray-900">
-                        {Math.floor(data.avgSessionDuration / 60)}m {Math.floor(data.avgSessionDuration % 60)}s
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Channel Performance Table */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-6 border-b border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900">Monthly Channel Breakdown</h3>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Month</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Channel</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Sessions</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Signups</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Conv. Rate</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Bounce Rate</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {[...channelPerformance]
-                    .sort((a, b) => b.month.localeCompare(a.month) || b.sessions - a.sessions)
-                    .slice(0, 20)
-                    .map((row, idx) => {
-                      const isLowConversion = row.conversion_rate < 2;
-                      return (
-                        <tr key={`${row.month}-${row.channel}-${idx}`} className={isLowConversion ? 'bg-red-50' : ''}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.month}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row.channel}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{row.sessions.toLocaleString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{row.signups.toLocaleString()}</td>
-                          <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${isLowConversion ? 'text-red-600' : 'text-green-600'}`}>
-                            {row.conversion_rate.toFixed(2)}%
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{row.bounce_rate.toFixed(1)}%</td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </>
-      )}
+      
+      <ChannelsTable channelPerformance={channelPerformance} isLoading={isLoading} />
     </div>
   );
 }

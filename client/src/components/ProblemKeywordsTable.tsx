@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { AlertTriangle, ArrowUpDown, ArrowDown, ArrowUp, Bot, Info } from 'lucide-react';
+import { AlertTriangle, ArrowUpDown, ArrowDown, ArrowUp, Bot, Info, Filter, X, Search } from 'lucide-react';
 
 interface KeywordData {
   keyword: string;
@@ -48,13 +48,20 @@ const isAIOverviewCannibalized = (keyword: KeywordData): boolean => {
   return isEducational && decline <= -10 && decline >= -35;
 };
 
+type SortField = 'traffic' | 'conversion' | 'change';
 type SortDirection = 'asc' | 'desc' | null;
+type FilterType = 'all' | 'wasted' | 'ai_cannibalized' | 'ai_triggered' | 'educational';
 
 export default function ProblemKeywordsTable() {
   const [keywords, setKeywords] = useState<KeywordData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+  const [sortField, setSortField] = useState<SortField>('traffic');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
+  const [filterType, setFilterType] = useState<FilterType>('all');
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   // Fetch keywords data
   useEffect(() => {
@@ -79,28 +86,109 @@ export default function ProblemKeywordsTable() {
     fetchKeywords();
   }, []);
 
-  // Sort keywords by traffic
-  const handleSort = () => {
-    if (sortDirection === null || sortDirection === 'asc') {
-      setSortDirection('desc');
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = [...new Set(keywords.map(k => k.category))].filter(Boolean).sort();
+    return cats;
+  }, [keywords]);
+
+  // Handle sort
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      // Toggle direction
+      if (sortDirection === 'desc') {
+        setSortDirection('asc');
+      } else if (sortDirection === 'asc') {
+        setSortDirection(null);
+      } else {
+        setSortDirection('desc');
+      }
     } else {
-      setSortDirection('asc');
+      setSortField(field);
+      setSortDirection('desc');
     }
   };
 
-  // Get sorted keywords
-  const sortedKeywords = [...keywords].sort((a, b) => {
-    if (sortDirection === 'desc') {
-      return b.traffic_2025 - a.traffic_2025;
-    } else if (sortDirection === 'asc') {
-      return a.traffic_2025 - b.traffic_2025;
-    }
-    return 0;
-  });
+  // Filter and sort keywords
+  const filteredAndSortedKeywords = useMemo(() => {
+    let result = [...keywords];
 
-  // Count problem keywords
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(k => 
+        k.keyword.toLowerCase().includes(query) ||
+        k.category?.toLowerCase().includes(query)
+      );
+    }
+
+    // Apply category filter
+    if (categoryFilter !== 'all') {
+      result = result.filter(k => k.category === categoryFilter);
+    }
+
+    // Apply type filter
+    switch (filterType) {
+      case 'wasted':
+        result = result.filter(isWastedTraffic);
+        break;
+      case 'ai_cannibalized':
+        result = result.filter(isAIOverviewCannibalized);
+        break;
+      case 'ai_triggered':
+        result = result.filter(k => k.ai_overview_triggered === 'Yes');
+        break;
+      case 'educational':
+        result = result.filter(isEducationalContent);
+        break;
+    }
+
+    // Apply sorting
+    if (sortDirection) {
+      result.sort((a, b) => {
+        let comparison = 0;
+        switch (sortField) {
+          case 'traffic':
+            comparison = a.traffic_2025 - b.traffic_2025;
+            break;
+          case 'conversion':
+            comparison = a.conversion_rate_2025 - b.conversion_rate_2025;
+            break;
+          case 'change':
+            comparison = a.traffic_change_pct - b.traffic_change_pct;
+            break;
+        }
+        return sortDirection === 'desc' ? -comparison : comparison;
+      });
+    }
+
+    return result;
+  }, [keywords, searchQuery, categoryFilter, filterType, sortField, sortDirection]);
+
+  // Count problem keywords (from full dataset)
   const wastedTrafficCount = keywords.filter(isWastedTraffic).length;
   const aiCannibalizedCount = keywords.filter(isAIOverviewCannibalized).length;
+  const aiTriggeredCount = keywords.filter(k => k.ai_overview_triggered === 'Yes').length;
+  const educationalCount = keywords.filter(isEducationalContent).length;
+
+  // Clear all filters
+  const clearFilters = () => {
+    setFilterType('all');
+    setCategoryFilter('all');
+    setSearchQuery('');
+  };
+
+  const hasActiveFilters = filterType !== 'all' || categoryFilter !== 'all' || searchQuery.trim() !== '';
+
+  // Sort icon component
+  const SortIcon = ({ field }: { field: SortField }) => {
+    if (sortField !== field || sortDirection === null) {
+      return <ArrowUpDown className="w-4 h-4 text-gray-400" />;
+    }
+    return sortDirection === 'desc' 
+      ? <ArrowDown className="w-4 h-4 text-primary-600" />
+      : <ArrowUp className="w-4 h-4 text-primary-600" />;
+  };
 
   if (isLoading) {
     return (
@@ -142,7 +230,7 @@ export default function ProblemKeywordsTable() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-amber-50 rounded-lg">
             <AlertTriangle className="w-5 h-5 text-amber-600" />
@@ -171,21 +259,135 @@ export default function ProblemKeywordsTable() {
           </div>
         </div>
 
-        {/* Legend */}
-        <div className="flex flex-col gap-1 text-xs text-gray-500">
-          <span className="inline-flex items-center gap-1">
-            <span className="w-3 h-3 bg-red-100 rounded"></span>
-            Wasted Traffic (Traffic &gt; 2K, Conv &lt; 1.5%)
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <span className="w-3 h-3 bg-purple-100 rounded"></span>
-            AI Overview Cannibalization
-          </span>
+        {/* Filter Toggle Button */}
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            showFilters || hasActiveFilters
+              ? 'bg-primary-50 text-primary-700'
+              : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+          }`}
+        >
+          <Filter className="w-4 h-4" />
+          Filters
+          {hasActiveFilters && (
+            <span className="w-2 h-2 bg-primary-500 rounded-full"></span>
+          )}
+        </button>
+      </div>
+
+      {/* Filter Panel */}
+      {showFilters && (
+        <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="flex flex-wrap gap-4">
+            {/* Search */}
+            <div className="flex-1 min-w-[200px]">
+              <label className="block text-xs font-medium text-gray-500 mb-1">Search</label>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search keywords..."
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="min-w-[150px]">
+              <label className="block text-xs font-medium text-gray-500 mb-1">Category</label>
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white"
+              >
+                <option value="all">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Type Filter */}
+            <div className="min-w-[180px]">
+              <label className="block text-xs font-medium text-gray-500 mb-1">Issue Type</label>
+              <select
+                value={filterType}
+                onChange={(e) => setFilterType(e.target.value as FilterType)}
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white"
+              >
+                <option value="all">All Keywords ({keywords.length})</option>
+                <option value="wasted">Wasted Traffic ({wastedTrafficCount})</option>
+                <option value="ai_cannibalized">AI Cannibalized ({aiCannibalizedCount})</option>
+                <option value="ai_triggered">AI Overview Triggered ({aiTriggeredCount})</option>
+                <option value="educational">Educational Content ({educationalCount})</option>
+              </select>
+            </div>
+
+            {/* Clear Filters */}
+            {hasActiveFilters && (
+              <div className="flex items-end">
+                <button
+                  onClick={clearFilters}
+                  className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                  Clear
+                </button>
+              </div>
+            )}
+          </div>
         </div>
+      )}
+
+      {/* Quick Filter Pills */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button
+          onClick={() => setFilterType('all')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+            filterType === 'all'
+              ? 'bg-gray-900 text-white'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+        >
+          All ({keywords.length})
+        </button>
+        <button
+          onClick={() => setFilterType('wasted')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+            filterType === 'wasted'
+              ? 'bg-red-600 text-white'
+              : 'bg-red-50 text-red-700 hover:bg-red-100'
+          }`}
+        >
+          🔥 Wasted Traffic ({wastedTrafficCount})
+        </button>
+        <button
+          onClick={() => setFilterType('ai_cannibalized')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+            filterType === 'ai_cannibalized'
+              ? 'bg-purple-600 text-white'
+              : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
+          }`}
+        >
+          🤖 AI Cannibalized ({aiCannibalizedCount})
+        </button>
+        <button
+          onClick={() => setFilterType('ai_triggered')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+            filterType === 'ai_triggered'
+              ? 'bg-blue-600 text-white'
+              : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+          }`}
+        >
+          AI Triggered ({aiTriggeredCount})
+        </button>
       </div>
 
       {/* AI Overview Warning Banner */}
-      {aiCannibalizedCount > 0 && (
+      {filterType === 'ai_cannibalized' && aiCannibalizedCount > 0 && (
         <div className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-lg">
           <div className="flex items-start gap-2">
             <Bot className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
@@ -211,19 +413,35 @@ export default function ProblemKeywordsTable() {
               <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
                 Keyword
               </th>
+              <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
+                Category
+              </th>
               <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">
                 <button
-                  onClick={handleSort}
+                  onClick={() => handleSort('traffic')}
                   className="inline-flex items-center gap-1 hover:text-primary-600 transition-colors"
                 >
                   Traffic (2025)
-                  {sortDirection === null && <ArrowUpDown className="w-4 h-4" />}
-                  {sortDirection === 'desc' && <ArrowDown className="w-4 h-4 text-primary-600" />}
-                  {sortDirection === 'asc' && <ArrowUp className="w-4 h-4 text-primary-600" />}
+                  <SortIcon field="traffic" />
                 </button>
               </th>
               <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">
-                Conversion Rate
+                <button
+                  onClick={() => handleSort('change')}
+                  className="inline-flex items-center gap-1 hover:text-primary-600 transition-colors"
+                >
+                  YoY Change
+                  <SortIcon field="change" />
+                </button>
+              </th>
+              <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">
+                <button
+                  onClick={() => handleSort('conversion')}
+                  className="inline-flex items-center gap-1 hover:text-primary-600 transition-colors"
+                >
+                  Conv. Rate
+                  <SortIcon field="conversion" />
+                </button>
               </th>
               <th className="text-center py-3 px-4 text-sm font-semibold text-gray-700">
                 <span className="inline-flex items-center gap-1" title="AI Overview cannibalization risk">
@@ -234,14 +452,26 @@ export default function ProblemKeywordsTable() {
             </tr>
           </thead>
           <tbody>
-            {sortedKeywords.length === 0 ? (
+            {filteredAndSortedKeywords.length === 0 ? (
               <tr>
-                <td colSpan={4} className="py-8 text-center text-gray-500">
-                  No keywords data available
+                <td colSpan={6} className="py-8 text-center text-gray-500">
+                  {hasActiveFilters ? (
+                    <div>
+                      <p>No keywords match your filters</p>
+                      <button
+                        onClick={clearFilters}
+                        className="mt-2 text-primary-600 hover:text-primary-700 text-sm font-medium"
+                      >
+                        Clear filters
+                      </button>
+                    </div>
+                  ) : (
+                    'No keywords data available'
+                  )}
                 </td>
               </tr>
             ) : (
-              sortedKeywords.map((keyword, index) => {
+              filteredAndSortedKeywords.map((keyword, index) => {
                 const isWasted = isWastedTraffic(keyword);
                 const isAICannibalized = isAIOverviewCannibalized(keyword);
                 const isEducational = isEducationalContent(keyword);
@@ -287,17 +517,23 @@ export default function ProblemKeywordsTable() {
                         </div>
                       </div>
                     </td>
+                    <td className="py-3 px-4 text-sm text-gray-600">
+                      {keyword.category || '—'}
+                    </td>
                     <td className={`py-3 px-4 text-right text-sm font-medium ${
                       isWasted ? 'text-red-900' : isAICannibalized ? 'text-purple-900' : 'text-gray-900'
                     }`}>
                       {keyword.traffic_2025.toLocaleString()}
-                      {keyword.traffic_change_pct !== 0 && (
-                        <span className={`ml-1 text-xs ${
-                          keyword.traffic_change_pct < 0 ? 'text-red-500' : 'text-green-500'
-                        }`}>
-                          ({keyword.traffic_change_pct > 0 ? '+' : ''}{keyword.traffic_change_pct.toFixed(1)}%)
-                        </span>
-                      )}
+                    </td>
+                    <td className="py-3 px-4 text-right text-sm">
+                      <span className={`font-medium ${
+                        keyword.traffic_change_pct < -10 ? 'text-red-600' :
+                        keyword.traffic_change_pct < 0 ? 'text-amber-600' :
+                        keyword.traffic_change_pct > 10 ? 'text-green-600' :
+                        'text-gray-600'
+                      }`}>
+                        {keyword.traffic_change_pct > 0 ? '+' : ''}{keyword.traffic_change_pct.toFixed(1)}%
+                      </span>
                     </td>
                     <td className={`py-3 px-4 text-right text-sm ${
                       isWasted ? 'text-red-900 font-medium' : 'text-gray-600'
@@ -325,23 +561,24 @@ export default function ProblemKeywordsTable() {
       </div>
 
       {/* Summary Footer */}
-      {keywords.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-          <span>Total: {keywords.length} keywords</span>
-          <div className="flex items-center gap-4">
-            {wastedTrafficCount > 0 && (
-              <span className="text-red-600">
-                ⚠️ {wastedTrafficCount} wasted traffic
-              </span>
-            )}
-            {aiCannibalizedCount > 0 && (
-              <span className="text-purple-600">
-                🤖 {aiCannibalizedCount} AI cannibalized
-              </span>
-            )}
-          </div>
+      <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>
+          Showing {filteredAndSortedKeywords.length} of {keywords.length} keywords
+          {hasActiveFilters && ' (filtered)'}
+        </span>
+        <div className="flex items-center gap-4">
+          {wastedTrafficCount > 0 && (
+            <span className="text-red-600">
+              ⚠️ {wastedTrafficCount} wasted traffic
+            </span>
+          )}
+          {aiCannibalizedCount > 0 && (
+            <span className="text-purple-600">
+              🤖 {aiCannibalizedCount} AI cannibalized
+            </span>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
